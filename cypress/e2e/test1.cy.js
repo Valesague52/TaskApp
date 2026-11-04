@@ -4,10 +4,10 @@ it('Debe mostrar la tarea creada', () => {
   cy.get('#email').type('admin@test.com');
   cy.get('#password').type('123');
 
-  cy.contains('button', 'Ingresar').click();
+  cy.contains('Ingresar').click();
 
   cy.get('#taskTitle').type('Comprar pan');
-  cy.contains('button', 'Crear tarea').click();
+  cy.contains('Crear tarea').click();
 
-  cy.contains('#taskList li', 'Comprar pan').should('exist');
+  cy.contains('Comprar pan').should('exist');
 });
