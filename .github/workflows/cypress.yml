@@ -14,10 +14,10 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22   # Cypress 16 necesita Node 22 o superior
 
       - name: Instalar dependencias
-        run: npm install
+        run: npm ci
 
       - name: Iniciar aplicación
         run: |
@@ -27,16 +27,18 @@ jobs:
       - name: Ejecutar Cypress
         run: npx cypress run
 
-      - name: Subir Screenshots
+      - name: Subir screenshots
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+          if-no-files-found: ignore
 
       - name: Subir videos
-        uses: actions/upload-artifact@v4
         if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-videos
           path: cypress/videos
+          if-no-files-found: ignore
